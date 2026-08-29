@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: monitoring-app
+data:
+  prometheus.yml: |-
+    global:
+      scrape_interval: 15s
+    
+    rule_files:
+      - /etc/prometheus/alert.rules
+      
+    alerting:
+      alertmanagers:
+      - static_configs:
+        - targets:
+          - alertmanager-service.monitoring-app.svc.cluster.local:9093
+
+    scrape_configs:
+      - job_name: 'django-app'
+        metrics_path: '/metrics'
+        static_configs:
+          - targets: ['cloud-monitoring-service.monitoring-app.svc.cluster.local:8000']
+      # Scrape kube-state-metrics or cadvisor if available for CPU metrics, but we assume it's available or prometheus is scraping kubernetes nodes automatically in a full setup. For our basic demo, we keep it simple.

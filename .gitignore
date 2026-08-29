@@ -1,0 +1,44 @@
+# ==============================================
+# .gitignore — Cloud Monitoring & Self-Healing App
+# ==============================================
+
+# Python
+*.pyc
+*.pyo
+__pycache__/
+*.egg-info/
+dist/
+build/
+
+# Virtual Environments
+.venv/
+venv/
+env/
+
+# Django
+db.sqlite3
+*.log
+staticfiles/
+
+# Environment Variables (NEVER commit secrets)
+.env
+.env.*
+.env.local
+.env.production
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Docker
+*.tar
+
+# Kubernetes
+kubeconfig
